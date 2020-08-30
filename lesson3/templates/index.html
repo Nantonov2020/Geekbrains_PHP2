@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+
+                        {% include 'catalog.html' %}              
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9 padding-right">
+                        <div class="features_items"><!--features_items-->
+                            <h2 class="title text-center">Последние товары</h2>
+
+                            {% for d in data_products %}
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="product.php?id={{ d.id }}">
+                                            <img src="templates/images/home/{{ d.image }}" alt="" width="269" height="249"/>
+                                            <h2>{{ d.price }} руб.</h2>
+                                            <p>{{ d.name }}</p>
+                                            </a>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                        </div>
+                                        {% if d.is_new == 1 %}
+                                        <img src="templates/images/home/new.png" class="new" alt="" />
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}    
+
+                        </div><!--features_items-->
+ 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% include 'footer.html' %}
