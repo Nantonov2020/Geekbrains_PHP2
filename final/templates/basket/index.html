@@ -1,0 +1,116 @@
+{% include 'header.html' %}
+
+<section id="cart_items">
+    <div class="container">
+        {% if content_data.Count == 0 %}
+            <div class="review-payment">
+                <h2>Корзина пуста. Добавьте товары в корзину.</h2>
+            </div>
+        {% else %}
+
+        <div class="review-payment">
+            <h2>Содержание корзины</h2>
+        </div>
+
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Позиция</td>
+                        <td class="description"></td>
+                        <td class="price">Цена</td>
+                        <td class="quantity">Количество</td>
+                        <td class="total">Сумма</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for position in content_data.PositionBasket %}
+                <tr>
+                    <td class="cart_product">
+                        <a href="#"><img src="images/home/{{ position.image }}" alt="" width="110" height="110"></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="#">{{ position.name }}</a></h4>
+                        <p>Web ID: {{ position.code }}</p>
+                    </td>
+                    <td class="cart_price">
+                        <p>{{ position.price }}</p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            <button class="cart_quantity_up" data-name="{{ position.id }}"> + </button>
+                            <input class="cart_quantity_input" type="text" name="quantity" value="{{ position.count }}" autocomplete="off" size="2" id="count{{ position.id }}" disabled>
+                            <button class="cart_quantity_down" data-name="{{ position.id }}"> - </button>
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price" id="summ{{ position.id }}">{{ position.price*position.count }}</p>
+                    </td>
+                    <td class="cart_delete">
+                        <button data-id="{{ position.id }}" class="cart_quantity_delete"><i class="fa fa-times"></i></button>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td colspan="2">
+                            <table class="table table-condensed total-result">
+                                   <tr>
+                                    <td>Итого сумма</td>
+                                    <td><span id="full_summ">{{ content_data.Summ }}</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-8 clearfix">
+                    <div class="bill-to">
+                        <p>Информация для заказа</p>
+                        <div class="form-one">
+                            <form>
+                                <input type="text" placeholder="Наименование Компании">
+                                <input type="text" placeholder="Имя *">
+                                <input type="text" placeholder="Фамилия">
+                                <input type="text" placeholder="Email *">
+                               </form>
+                        </div>
+                        <div class="form-two">
+                            <form>
+                                <select>
+                                    <option>Россия</option>
+                                    <option>Укарина</option>
+                                    <option>Беларусь</option>
+                                    <option>Казахстан</option>
+                                </select>
+
+                                <input type="text" placeholder="Почтовый индекс">
+                                <input type="text" placeholder="Адрес *">
+                                  <input type="text" placeholder="Телефон *">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="order-message">
+                        <p>Дополнительная информация </p>
+                        <textarea name="message"  placeholder="Внесите здесь дополнительную информацию по заказу: желамое время звонков, доставки и пр." rows="16"></textarea>
+                    </div><a class="btn btn-primary" href="">Заказать</a><br><br>
+                </div>
+            </div>
+
+        </div>
+
+        {% endif %}
+
+</section> <!--/#cart_items-->
+
+{% include 'footer.html' %}

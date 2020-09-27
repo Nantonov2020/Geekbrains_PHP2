@@ -1,0 +1,64 @@
+{% include 'header.html' %}
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="left-sidebar">
+            <h2>Каталог</h2>
+            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                
+                {% for position in content_data.positionOfCatalog %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="index.php?path=catalog/{{ position.id }}">{{ position.name }}</a></h4>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div><!--/category-products-->
+
+        </div>
+    </div>
+
+    <div class="col-sm-9 padding-right">
+        {% for position in content_data.add %}
+        <div class="product-details"><!--product-details-->
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="view-product">
+                        <img src="images/home/{{ position.image }}" alt="" width='340' height='340'/>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    
+                    <div class="product-information"><!--/product-information-->
+                        {% if position.is_new == 1 %}
+                        <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+                        {% endif %}
+                        <h2>{{ position.name }}</h2>
+                        <p>Код товара: {{ position.code }}</p>
+                        <span>
+                            <span>{{ position.price }} руб.</span>
+                            <label>Количество:</label>
+                            <input type="text" value="1" class="product-details-count"/>
+                            <button type="button" class="btn btn-fefault cart" data-name="{{ position.id }}>
+                                <i class="fa fa-shopping-cart"></i>
+                                В корзину
+                            </button>
+                        </span>
+                        <p><b>Производитель:</b> {{ position.brand }} </p>
+                    </div><!--/product-information-->
+                </div>
+            </div>
+            <div class="row">                                
+                <div class="col-sm-12">
+                    <h5>Описание товара</h5>
+                    <p>{{ position.description }} </p>
+                </div>
+            </div>
+        </div><!--/product-details-->
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'footer.html' %}
